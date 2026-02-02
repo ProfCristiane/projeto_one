@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Meu Sistema Django
+        {% endblock %}
+    </title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+        }
+
+        header {
+            background-color: #7fedb6ff;
+            color: white;
+            padding: 15px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color: #369946ff;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #e9ecef;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        table th {
+            background-color: #dee2e6;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f5fbf;
+            min-width: 180px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #174a96;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .logout-form {
+    display: inline;
+}
+
+.logout-link {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 15px;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sistema de Clientes</h1>
+    </header>
+
+    <nav>
+        <a href="{% url 'produtos:home' %}">Home</a>
+        <div class="dropdown">
+        <a href="{% url 'produtos:listar' %}">Produtos</a>
+            <div class="dropdown-content">
+                <a href="{% url 'produtos:listar' %}">Listar Produtos</a>
+                {% if user.tipo == 'ADMIN' %}
+                <a href="{% url 'produtos:cadastrar' %}">Cadastrar Produto</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="dropdown">
+        <a href="{% url 'clientes:listar' %}">Produtos</a>
+            <div class="dropdown-content">
+                <a href="{% url 'clientes:listar' %}">Clientes</a>
+                {% if user.tipo == 'ADMIN' %}
+                <a href="{% url 'clientes:cadastrar' %}">Cadastrar Cliente</a>
+                {% endif %}
+                
+            </div>
+        </div>
+        
+        <a href="{% url 'produtos:contato' %}">Contato</a>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}" class="logout-form">
+            {% csrf_token %}
+    <button type="submit" class="logout-link">Sair</button>
+</form>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 — Projeto Django</p>
+    </footer>
+
+</body>
+</html>

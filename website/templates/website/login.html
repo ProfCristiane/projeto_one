@@ -1,0 +1,13 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Sistema Tech Informática{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Entrar</button>
+</form>
+{% endblock %}
