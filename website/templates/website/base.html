@@ -137,9 +137,9 @@
             </div>
         </div>
         <div class="dropdown">
-        <a href="{% url 'clientes:listar' %}">Produtos</a>
+        <a href="{% url 'clientes:listar' %}">Clientes</a>
             <div class="dropdown-content">
-                <a href="{% url 'clientes:listar' %}">Clientes</a>
+                <a href="{% url 'clientes:listar' %}">Listar Clientes</a>
                 {% if user.tipo == 'ADMIN' %}
                 <a href="{% url 'clientes:cadastrar' %}">Cadastrar Cliente</a>
                 {% endif %}
